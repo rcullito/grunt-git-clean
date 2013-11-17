@@ -6,13 +6,10 @@
  * Licensed under the MIT license.
  */
 
- console.log('blah');
 
  var exec = require('child_process').exec;
 
-     exec('git clean -n', function(error, stdout, stderr) {
-      console.log('stdout: ' + stdout);
-    })
+
 
 
 'use strict';
@@ -23,6 +20,12 @@ module.exports = function(grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('git_clean', 'git clean directories of your choice', function() {
+
+    var done = this.async();
+    exec('git clean -n', function(error, stdout, stderr) {
+      console.log('stdout: ' + stdout);
+      done();
+    });
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
