@@ -1,7 +1,7 @@
 {
   "name": "grunt-git-clean",
   "description": "git clean directories of your choice",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/wampum/grunt-git-clean",
   "author": {
     "name": "Rob Culliton",

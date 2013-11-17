@@ -1,89 +1,54 @@
 # grunt-git-clean
 
-> git clean directories of your choice
+> clear out any unwanted changes since your last commit.
 
-## Getting Started
-This plugin requires Grunt `~0.4.1`
-
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+## Setup
 
 ```shell
 npm install grunt-git-clean --save-dev
 ```
 
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+Once the plugin has been installed, enable inside your Gruntfile with:
 
 ```js
 grunt.loadNpmTasks('grunt-git-clean');
 ```
 
-## The "git_clean" task
-
-### Overview
-In your project's Gruntfile, add a section named `git_clean` to the data object passed into `grunt.initConfig()`.
+## Overview
+In your project's Gruntfile, add a section named `git_clean` to the data object passed into `grunt.initConfig()`. grunt git clean doesn't require any additional options to be passed into it's configuration.
 
 ```js
 grunt.initConfig({
-  git_clean: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+  git_clean: {},
 })
 ```
 
-### Options
+### What happens?
+The git clean task will first perform a dry run of git clean, showing you what files would be removed from your working directory. (For more information about the underlying git clean command, click [here](http://git-scm.com/docs/git-clean))
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+    $ grunt git_clean
 
-A string value that is used to do something with whatever.
+    Running "git_clean" task
+    Would remove lib
+    Would remove test_script.js
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+    Proceed with removing the above files? (y/n)
 
-A string value that is used to do something else with whatever else.
+You will then be prompted to either perform the proposed clean, or abort.
 
-### Usage Examples
+Aborting:
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+    Proceed with removing the above files? (y/n) n
+    Files will be kept in working directory.
 
-```js
-grunt.initConfig({
-  git_clean: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+    Done, without errors.
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+Continue:
 
-```js
-grunt.initConfig({
-  git_clean: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+    Proceed with removing the above files? (y/n) y
+    Removing lib
+    Removing test_script.js
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+    Done, without errors.
 
-## Release History
-_(Nothing yet)_
+
