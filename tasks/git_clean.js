@@ -22,7 +22,6 @@ var rl = readline.createInterface({
 module.exports = function(grunt) {
 
   grunt.registerMultiTask('git_clean', 'git clean directories of your choice', function() {
-    // first verify that it is a git repository and verify if this ins't the case
     var done = this.async();
     exec('git status', function(error, stdout, stderr) {
       if (error && error.code === 128) {
@@ -31,7 +30,6 @@ module.exports = function(grunt) {
       } else {
         exec('git clean -n', function(error, stdout, stderr) {
           grunt.log.writeln(stdout);
-          // only execute this logic if there are files that have been modified
           if (!stdout) {
             grunt.log.writeln('Git found no files to remove');
             done();
