@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     git_clean: {
       all: { // verify that this is the target
-        options: {method: 'force'},
+        options: {},
       },
     },
 

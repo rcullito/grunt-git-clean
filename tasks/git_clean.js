@@ -27,20 +27,23 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('git_clean', 'git clean directories of your choice', function() {
 
-    console.log(this.options());
-
-
     var done = this.async();
     exec('git clean -n', function(error, stdout, stderr) {
       console.log(stdout);
 
-      rl.question("Proceed with removing the above files?", function(answer) {
-        // condiational force or abor to done
-        console.log("Ok then we will just: ....", answer);
-        rl.close();
-        done();
+      rl.question("Proceed with removing the above files? (y/n)", function(answer) {
+        if (answer === "y") {
+          exec('git clean -f', function(error, stdout, stderr) {
+            console.log(stdout);
+            rl.close();
+            done();
+          });
+        } else {
+          console.log("Files will be kept in working directory.");
+          rl.close();
+          done();
+        }
       });
-
     });
 
     // Merge task-specific and/or target-specific options with these defaults.
