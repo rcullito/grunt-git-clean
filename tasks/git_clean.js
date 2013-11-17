@@ -21,7 +21,7 @@ var rl = readline.createInterface({
 
 module.exports = function(grunt) {
 
-  grunt.registerMultiTask('git_clean', 'git clean directories of your choice', function() {
+  grunt.registerTask('git_clean', 'git clean directories of your choice', function() {
     var done = this.async();
     exec('git status', function(error, stdout, stderr) {
       if (error && error.code === 128) {
